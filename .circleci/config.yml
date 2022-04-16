@@ -2,29 +2,25 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.2
 jobs:
-  install-and-up:
+  build:
     docker:
       - image: strapi/strapi
     steps:
       - checkout
       - run: npm install
-  build-and-test:
+  deploy:
     executor:
       name: node/default
     steps:
-      - setup_remote_docker
-      - checkout
-  build-and-deploy:
-    docker:
-      - image: strapi/strapi
-    steps:
-      - checkout
-      - run: npm install
+      - run:
+          name: VultrDeploy Over SSH
+          command: |
+            ssh $VULTR_USER@$VULTR_HOST docker-compose up
 
 workflows:
-  build-and-test:
-    jobs:
-      - build-and-test
   build-and-deploy:
     jobs:
-      - build-and-deploy
+      - build
+      - deploy:
+          requires:
+            - build
