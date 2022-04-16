@@ -12,6 +12,9 @@ jobs:
     executor:
       name: node/default
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:i1f25PiqbLsqR4iGjv01ZWRcYB7NjSYYlzL58Y3nm5A"
       - run:
           name: VultrDeploy Over SSH
           command: |
