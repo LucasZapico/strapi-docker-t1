@@ -14,9 +14,6 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
-      - node:
-          steps:
-            - run: npm install
   build-and-deploy:
     docker:
       - image: strapi/strapi
@@ -28,9 +25,6 @@ workflows:
   build-and-test:
     jobs:
       - build-and-test
-      - aws-ecr/build-and-push-image:
-          context: test
-          repo: strapi
   build-and-deploy:
     jobs:
       - build-and-deploy
