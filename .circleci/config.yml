@@ -7,7 +7,7 @@ jobs:
       - image: strapi/strapi
     steps:
       - checkout
-      - run: npm install
+      - run: docker-compose up
   deploy:
     executor:
       name: node/default
