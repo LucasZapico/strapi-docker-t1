@@ -18,7 +18,7 @@ jobs:
       - run:
           name: VultrDeploy Over SSH
           command: |
-            ssh  StrictHostKeyChecking=no $VULTR_USER@$VULTR_HOST docker-compose up
+            ssh -o  StrictHostKeyChecking=no $VULTR_USER@$VULTR_HOST docker-compose up
 
 workflows:
   build-and-deploy:
