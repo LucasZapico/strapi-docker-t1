@@ -1,4 +1,4 @@
-version: 2 # CircleCI version
+version: 2.1 # CircleCI version
 jobs:
   build:
     machine: true # Use a Linux VM instead of docker environment
@@ -7,16 +7,17 @@ jobs:
       - checkout
       - run: docker-compose up -d
   deploy:
+    machine: true
     steps: 
       - add_ssh_keys:
           fingerprints:
             - 3c:cd:08:8c:62:94:91:ec:4d:a9:a6:72:8d:dd:31:8f
       - run: ssh  StrictHostKeyChecking=no $VULTR_USER@$VULTR_HOST 
       - run: ls -la
-workflow:
+workflows:
   build-and-deploy:
-    job: 
+    jobs: 
       - build
-      - deploy: 
-        requires: 
-          - build
+      - deploy:
+          requires: 
+            - build
