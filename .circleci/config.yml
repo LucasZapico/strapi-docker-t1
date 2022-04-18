@@ -6,8 +6,17 @@ jobs:
     steps:
       - checkout
       - run: docker-compose up -d
-      - run: ls -la 
+  deploy:
+    steps: 
+      - add_ssh_keys:
+          fingerprints:
+            - 3c:cd:08:8c:62:94:91:ec:4d:a9:a6:72:8d:dd:31:8f
+      - run: ssh  StrictHostKeyChecking=no $VULTR_USER@$VULTR_HOST 
+      - run: ls -la
 workflow:
-  init:
+  build-and-deploy:
     job: 
       - build
+      - deploy: 
+        requires: 
+          - build
