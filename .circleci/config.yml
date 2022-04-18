@@ -6,11 +6,8 @@ jobs:
     steps:
       - checkout
       - run: docker-compose up -d
-  debug:
-    steps:
       - run: echo ls -la 
 workflow:
   init:
     job: 
       - build
-      - debug
