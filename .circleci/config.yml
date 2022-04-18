@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run: docker-compose up -d
-      - run: echo ls -la 
+      - run: ls -la 
 workflow:
   init:
     job: 
